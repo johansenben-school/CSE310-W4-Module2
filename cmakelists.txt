@@ -1,0 +1,57 @@
+
+
+cmake_minimum_required(VERSION 3.16)
+set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE BOOL "" FORCE)
+project(Chess LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# --------------------------------------------------
+# Fetch SDL2 if not already available
+# --------------------------------------------------
+include(FetchContent)
+
+FetchContent_Declare(
+    SDL2
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+    GIT_TAG release-2.30.2
+)
+FetchContent_Declare(
+    SDL2_ttf
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL_ttf.git
+    GIT_TAG release-2.22.0
+)
+
+FetchContent_MakeAvailable(SDL2 SDL2_ttf)
+# --------------------------------------------------
+# Build your executable from src/
+# --------------------------------------------------
+file(GLOB_RECURSE SOURCE_FILES
+    src/*.cpp
+)
+
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+# add_executable(${PROJECT_NAME} 
+#     src/main.cpp 
+#     src/StartMenu1.cpp 
+#     src/Window.cpp
+# )
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+
+# --------------------------------------------------
+# Link SDL2
+# --------------------------------------------------
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    SDL2::SDL2
+    SDL2_ttf::SDL2_ttf
+)
+
+# Needed on macOS for frameworks
+if (APPLE)
+    target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2main)
+endif()
