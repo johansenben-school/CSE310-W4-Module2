@@ -3,7 +3,7 @@
 C++ Chess game using the sdl2 library; 
 This was my first time using c++ in a few years and I haddn't used sdl2 before and i couldn't get cmake to work before now; this project reminded me of some of the problems with c++ and why I stopped using it, but cmake at least got rid of most of the compiling problems
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/dWg2CsjW-pY)
 
 # Development Environment
 
