@@ -12,8 +12,8 @@ void Window::init()
 
   this->window = SDL_CreateWindow(
     this->title.c_str(),
-    SDL_WINDOWPOS_CENTERED,
-    SDL_WINDOWPOS_CENTERED,
+    SDL_WINDOWPOS_CENTERED_DISPLAY(DISPLAY),
+    SDL_WINDOWPOS_CENTERED_DISPLAY(DISPLAY),
     WIN_WIDTH, WIN_HEIGHT,
     SDL_WINDOW_SHOWN
   );
@@ -73,15 +73,16 @@ void Window::start()
   this->running = true;
   while (this->running) {
     this->renderer->setColor({0,0,0,0});
-    this->renderer->renderClear();
+    this->renderer->renderClear(this->renderer);
     while (SDL_PollEvent(&this->event)) {
-      if (this->event.type == SDL_QUIT)
+      if (this->event.type == SDL_QUIT) {
         this->running = false;
-      else
-        this->currentPage->handleEvent(event, *this);
+        break;
+      } else
+        this->currentPage->handleEvent(event, *this, rerender);
     }
     this->currentPage->update();
-    this->currentPage->render(this->renderer);
+    this->currentPage->render(this->renderer, this->rerender);
 
     this->renderer->renderPresent();
     // Small delay so we don't burn 100% CPU

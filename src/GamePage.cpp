@@ -6,9 +6,11 @@ GamePage::GamePage()
   this->board = Board();
 }
 
-void GamePage::render(Renderer *renderer)
+void GamePage::render(Renderer *renderer, bool& rerender)
 {
-  board.render(renderer);
+  if (!rerender)
+    return;
+  board.render(renderer, rerender);
 }
 
 void GamePage::update()
@@ -16,7 +18,7 @@ void GamePage::update()
   board.update();
 }
 
-void GamePage::handleEvent(const SDL_Event& event, Window& window)
+void GamePage::handleEvent(const SDL_Event& event, Window& window, bool& rerender)
 {
-  board.handleEvent(event, window);
+  board.handleEvent(event, window, rerender);
 }

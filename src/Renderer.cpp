@@ -4,7 +4,7 @@ Renderer::Renderer(SDL_Renderer* r)
 {
   this->renderer = r;
   TTF_Init();
-  this->font = TTF_OpenFont("Arial.ttf", 24);
+  this->font = TTF_OpenFont("Arial.ttf", 48);
 }
 
 Renderer::~Renderer()
@@ -40,12 +40,30 @@ void Renderer::renderRect(int x, int y, int width, int height)
   delete r;
 }
 
-void Renderer::renderClear()
+void Renderer::renderPolygon(int points, int x, int y, int radius)
 {
-  SDL_RenderClear(this->renderer);
+  if (points < 3)
+    return;
+  for (int i = 0; i < points; ++i) {
+    float angle1 = (i * 2.0f * M_PI) / points;
+    float angle2 = ((i + 1) * 2.0f * M_PI) / points;
+
+    int x1 = static_cast<int>(x + radius * cos(angle1));
+    int y1 = static_cast<int>(y + radius * sin(angle1));
+    int x2 = static_cast<int>(x + radius * cos(angle2));
+    int y2 = static_cast<int>(y + radius * sin(angle2));
+
+    SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+  }
+}
+
+void Renderer::renderClear(bool rerender)
+{
+  if (rerender)
+    SDL_RenderClear(this->renderer);
 }
 
 void Renderer::renderPresent()
 {
-  SDL_RenderPresent(this->renderer);
+  SDL_RenderPresent(renderer);
 }

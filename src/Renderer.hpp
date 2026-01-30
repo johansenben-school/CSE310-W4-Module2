@@ -5,7 +5,6 @@
 
 class Renderer {
   private:
-  
   public:
   SDL_Renderer* renderer;
 
@@ -20,7 +19,8 @@ class Renderer {
   void setColor(SDL_Color color);
   void renderText(std::string text, SDL_Color color, int x, int y, bool rerender = false);
   void renderRect(int x, int y, int width, int height);
-  void renderClear();
+  void renderPolygon(int points, int x, int y, int radius);
+  void renderClear(bool rerender);
   void renderPresent();
 };
 

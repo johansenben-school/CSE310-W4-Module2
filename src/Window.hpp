@@ -8,6 +8,7 @@
 
 class Window {
   const std::string title = "Chess";
+  bool rerender = true;
 
   SDL_Window* window;
 
