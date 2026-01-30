@@ -3,8 +3,10 @@
 Renderer::Renderer(SDL_Renderer* r)
 {
   this->renderer = r;
+
+  //init font
   TTF_Init();
-  this->font = TTF_OpenFont("Arial.ttf", 48);
+  this->font = TTF_OpenFont("Arial.ttf", 70);
 }
 
 Renderer::~Renderer()
@@ -22,7 +24,7 @@ void Renderer::renderText(std::string text, SDL_Color color, int x, int y, bool 
 {
   this->textRect.x = x;
   this->textRect.y = y;
-  if (text != this-> lastText || rerender) {
+  if (text != this-> lastText || rerender) {//if text changed -> rerender, else -> dont rerender because it's inefficient
     this->lastText = text;
     SDL_FreeSurface(textSurface);
     SDL_DestroyTexture(this->textTexture);
@@ -41,7 +43,7 @@ void Renderer::renderRect(int x, int y, int width, int height)
 }
 
 void Renderer::renderPolygon(int points, int x, int y, int radius)
-{
+{//todo add rotation and fillPolygon
   if (points < 3)
     return;
   for (int i = 0; i < points; ++i) {

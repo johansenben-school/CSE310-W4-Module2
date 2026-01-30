@@ -4,8 +4,8 @@ King::King(PieceColor color, int x, int y): Piece(color, x, y)
 {
 }
 
-void King::getPossibleMoves(std::array<MoveTypes, 64> &moves, std::vector<std::unique_ptr<Piece>> &board)
-{
+void King::getPossibleMoves(std::array<MoveTypes, 64> &moves, std::vector<std::unique_ptr<Piece>> &board, int lastMoveIndex)
+{//very similar to knight; just 1 square away and dont check for 2:1 ratio
   for (int y = -1; y <= 1; y += 1) {
     for (int x = -1; x <= 1; x += 1) {
       //check bounds

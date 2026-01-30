@@ -5,11 +5,12 @@ TTF_Font* font = nullptr;
 
 void Window::init()
 {
- if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-    std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
+ if (SDL_Init(SDL_INIT_VIDEO) != 0) { //did SDL_Init work?
+    std::cerr << "SDL_Init Error: " << SDL_GetError() << "\n";
     return;
   }
 
+  //create window
   this->window = SDL_CreateWindow(
     this->title.c_str(),
     SDL_WINDOWPOS_CENTERED_DISPLAY(DISPLAY),
@@ -54,10 +55,6 @@ Window::~Window()
   SDL_Quit();
   TTF_CloseFont(font);
   TTF_Quit();
-
-  //delete this->renderer; //theres a warning if i do this, but it deletes when the program closes anyways
-  
-  //delete this->window; //theres a warning if i do this, but it deletes when the program closes anyways
 }
 
 void Window::changePage(Renderable *newPage)

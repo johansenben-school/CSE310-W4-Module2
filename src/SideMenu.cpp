@@ -6,6 +6,7 @@ SideMenu::SideMenu()
 
 void SideMenu::render(Renderer *renderer, bool& rerender)
 {
+  //todo - actually render things
   if (!rerender)
     return;
 }

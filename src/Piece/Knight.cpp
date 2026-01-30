@@ -4,7 +4,7 @@ Knight::Knight(PieceColor color, int x, int y): Piece(color, x, y)
 {
 }
 
-void Knight::getPossibleMoves(std::array<MoveTypes, 64> &moves, std::vector<std::unique_ptr<Piece>> &board)
+void Knight::getPossibleMoves(std::array<MoveTypes, 64> &moves, std::vector<std::unique_ptr<Piece>> &board, int lastMoveIndex)
 {
   for (int y = -2; y <= 2; y += 1) {
     for (int x = -2; x <= 2; x += 1) {

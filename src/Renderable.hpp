@@ -1,12 +1,13 @@
 #ifndef RENDERABLE
 #define RENDERABLE
 
-#include "libs.hpp"
+#include "util.hpp"
 #include "Renderer.hpp"
 
 class Window;
 
 class Renderable {
+  //virtual class; use inheritance
   public:
   virtual ~Renderable() = default;
   virtual void render(Renderer* renderer, bool& rerender) = 0;

@@ -11,6 +11,7 @@ void GamePage::render(Renderer *renderer, bool& rerender)
   if (!rerender)
     return;
   board.render(renderer, rerender);
+  //render side menu
 }
 
 void GamePage::update()
